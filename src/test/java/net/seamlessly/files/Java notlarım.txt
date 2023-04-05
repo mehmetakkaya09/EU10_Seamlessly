@@ -1,0 +1,708 @@
+a class is a "template/ blueprint" that how an object will behave and what the object will contain
+
+
+
+What is wrapper classes?
+--- class of primitive data types.bu its name starts UpperCase.
+Why we need to use wrapper classes?
+--- 2 main reason 
+1- for array list and collection beacuse in collewction we cant use primitive data types
+2- wrapper classes has some useful method. using method in order to make our job easily
+
+What is the difference between parseInt() and valueOf()?
+---valueOf()  returns an object (wrapper class)
+---parseInt() returns primitive data type 
+
+What is the difference between autoboxing and unboxing
+--- autoboxing primitive ---> object (wrapper class)
+--- unboxing object(wrapper) ---> primitive
+
+ARRAY LIST
+it is a data structure
+is one of the collection type
+why we need it because its flexible
+we dont need increase or decrease manually then array list its automaticly do this
+
+Array List is the class of collection 
+so its size is not fixed its dynamic but doesnt support primitives
+Array: size is fixed, supports both primitives & non primitives
+	Collection: size is dynamic, does not support primitives
+Array List is the fastest data structure internally uses array
+Array List allows that add and remove any element in object
+
+	add(Data): adds the data after the last index of the ArrayList
+	add(index, Data): inserts the data at the given index
+	size(): returns the total number of elements
+	get(index): returns the element at the given index
+	set(index,  Data): replaces the element at given index with the new element.
+	remove(int index): removes the element at the given index
+	remove(Object): removes the given object from arraylist, returns boolean
+	clear(): remove all the elements of the arraylist, size will be 0
+	indexOf(Data): returns the first matching element's index number, returns int
+	lastIndexOf(Data): returns the last matching element's index number, returns int
+	contains(Data): returns true if the element is contained in the arraylist, otherwise returns false
+	equals(ArrayList): returns true if two arraylists are equal (same elements in same order),
+otherwise returns false
+        
+BULK OPERATIONS: argument MUST be a collection type
+add or remove or reatain contain etc thats multiple things (as all)
+
+	addAll(CollectionType): adds collection of values to the arrayList
+asList(array of values) ===> returns the array as collectionType
+
+	removeAll(CollectionType): removes all the matching elements from the arraylist
+remove(): when we remove one element. DO NOT use it in the loop
+removeAll(): when we remove multiple elements ( if the elements that we want to remove are known)
+removeIf(): when we remove under a condition (if the elements we want to remove are unknown)
+
+	retainAll(CollectionType): removes all the non-matching elements from the arraylist
+retainAll(): when we want to retain multiple elements (if the elements that we want to retain are known)
+
+	containsAll(CollectionType): checks if all the elements are contained in the arraylist
+
+	remove(): when we remove one element. DO NOT use it in the loop
+	removeAll(): when we remove multiple elements ( if the elements that we want to remove are known)
+	retainAll(): when we want to retain multiple elements (if the elements that we want to retain are known)
+	removeIf(): when we remove under a condition (if the elements we want to remove are unknown)
+
+Collections: utility class of collection
+	
+	sort() in order from smallest to largest Collections.sort(name of arrayList);
+	reverse() for reversing all				Collections.reverse(name of arrayList);
+	swap() change the places   		Collections.swap(name of arrayList,first index, second index)
+	max() find the max num						Collections.max(name of arrayList);
+	min() find the min num 					Collections.min(name of arrayList);
+	replaceAll() replace all the written number to new one
+										Collections.replaceAll(name of arrayList, old value, new value);
+	frequency() how many same 				Collections.frequency(name of arrayList,value);
+
+Custom class  :  why we need?
+ because we can use different data types at the same time
+one class contains constructors
+
+classes doesnt have take memory
+
+Constructors  :  
+why we need  this?
+because 1-creating object and 2-assigning values inside the object
+
+we can use the constructors initialize the objects instance variables
+
+constructor you will use to set the instances
+
+if we dont use constructor we can not call the instance variables
+and to call instance variables we should use " this" keyword
+
+only the constructor can call the other constructor
+
+this keyword refers to the instances. Current class
+
+this.  : calls instance variables & instance methods
+this() : calls the constructor of current class
+
+static block you will use to set the static variables
+
+static blok used for initializing static variables
+runs first before everything, only runs one time	
+
+in static block we cannot use "this" keyword. just declare the variable name.
+
+static methods only accept static members you can not use instance variables
+
+
+its not efficient way you should be using constructor or any other method 
+to set the static variable even though it doesn't give an error
+
+public String name; --> if it is public  we can reach from everywhere. this package or outside package or other package
+String lastName;    --> if it is default we can reach in the same package    but we can not reach from the outside of the  package
+private int id;     --> if it is private we can reach in the same class only but we can not reach from any package
+
+
+Garbage Colllection is collection of unreferenced object:
+					1. null keyboard;
+					2. creating a new object;
+Garbage Collector: responsible for collecting the unreferenced objects from java heap.
+and destroys it ( finalize())
+
+right side is the object left side is the refenrence or variable
+
+OOP object oriented programming A design pattern of the app in an organized and modular way
+it has 4 principles
+1-Encapsulation
+2-Inheritance
+3-Abstraction
+4-Polymorphism
+
+-----------------------------------------------------------------------------
+
+Encapsulation--> is hiding data by using private access modifier with the variables
+
+Then we will use  public gather and setter methods to implement
+
+
+public means everybody access so developers dont want this and they use private access modifier
+
+so to access that codes we need to use getters and setters
+
+getters are in order to able to read.. must be the same data type such as the access modifier that tries to access
+and return method that returns the private instance variable
+
+setters are in order to able to write (modifier).. return type is void and has to be parametter 
+
+ant that parametter must be the same data type of the private instance variable
+and assigning by " this." keyword
+
+Why Encapsulation?
+1) Better control of class attributes and methods
+2) Class attributes can be made read-only (if you only use the get method), or write-only (if you only use the set method)
+3) Flexible: the programmer can change one part of the code without affecting other parts
+4) Increased security of data
+
+				
+	use getter/setter to read/write the private data
+
+
+	Getter (Read Only): public instance method 
+			  			Return type is not void
+			  			Return type must match with private instance variable' data type
+			  			Does not pass any parameter
+			  			Returns the private instance variables value
+
+	Setter (Write Only): public instance method 
+			  			Return type is void
+			  			Passes a parameter
+			  			Parameter' data type must match with private instance variable' data type
+			  			reassigns the private instance variable to given argument
+
+-----------------------------------------------------------------------------
+
+Inheritance is to build IS A relationship between classes (sub(child) class and super(parent) class) 
+parent class is the main class has instance variables and constructors and general methods
+sub class is more specific class then parent class and it provides the same variables and methods 
+by using  "extends" keyword with parent class
+
+it determines us less code less memory and rather then typing the construtors every time in sub class only once typing in parent class
+it improves the reusability and easy to maintain
+
+super keyword : refers to the instances. Parent Class
+
+super.    calls instance variables & instance methods of super class
+super()   calls the constructor from  parent class to the sub classes
+
+one class only extends one class it dos not allow one class extend more then one class
+child class or parent class doesnt extend eachother at the same time
+
+types of inheritance
+1 single inheritance       -> one class parent one class sub and extends one on one
+2 hierarchical inheritance -> more than one sub classes extend to one parent (super) All classes  extend one
+3 multilevel inheritance   -> one sub(child) class extend the other sub(child) class and that sub(child) class extend the parent class 
+so every child class has own child class
+
+
+Parent class constructor calls in inheritance
+
+private variables and methods are not inherited
+
+	1.	constructors are not inherited but
+			Child class MUST call parent class' constructor
+	2.	parent class' default constructor is always called implicitly in child class
+	3,	parent class' constructor with argument need to be called explicitly
+
+-----------------------------------------------------------------------------
+METHOD OVERLOADING
+
+What is method overloading?
+
+		method name must be same but parameters must be different
+
+		multiple different methods having the same name.
+		
+		its not important to change data type 
+
+		every method (ANY method) can be OVERLOADED
+
+-----------------------------------------------------------------------------
+
+METHOD OVERRIDING: if we want to give different implementation in different sub class we should use overriding
+we must use overriding in the subclass
+
+we cant override methods with private access modifier or with static and final specifiers
+
+only instance methods can be overriden
+
+return type method name and parameters of the overriddden method MUST be SAME
+
+
+IS A relation in order to occur there must be inheritance. parent and sub classes if you have inheritance it is IS A relation
+
+HAS A relation if you have one class inside the another class it is HAS A relation
+
+-- PRIVATE AND FINAL METHODS can be OVERLOADED but can not be OVERRIDDEN
+ 
+                    overloading   is performed within class    overriding occurs in two classes
+
+-- ACCESS SPECIFIER overloading   can be CHANGED               overriding mustnt be more restrictive than original method
+-- PARAMETER        overloading   must be DIFFERENT            overriding must be SAME
+-- RETURN TYPE      overloading   can be same or different     overriding must be SAME
+
+-----------------------------------------------------------------------------
+
+PROTECTED
+
+-----------------------------------------------------------------------------
+
+FINAL KEYWORD  which is in 3 categories You can use it for the variables, for methods, and for classes.
+
+if we use it for variables it means that variables cannot be reassigned.
+and if you want to create a constant variable, we can use a final in terms of methods.
+If you want to prevent that method with the overriding we can use a final again. And for the classes if you want to. prevent the inheritance of that class we should use. Finally.
+
+-----------------------------------------------------------------------------
+
+EXCEPTIONS -->  An unwanted or unexpected event
+
+There are two types 
+1- CHECKED exceptions					2- UNCHECKED exceptions
+--checked at compile time			     --not checked at compile time
+--occurs during the compile time			--occurs during the run time
+--that doesnt have IS A relationship 		--IS A relationship               with RuntimeEXception(Parent Class)
+
+If it is ckecked java says the exception so we can handle it 
+but if  unchecked java doesnt say the exception
+
+ERRORS 	--> Indicates that an illegal operation is being performed
+
+		--> occurs during the runtime only
+
+		--> they can not recovered and are not recommended to handle them
+
+TRY CATCH BLOCKS     --> used for handling checked and unchecked exceptions
+		try{
+			exception code
+		}catch(ExceptionClass  e){
+		e.printStackTrace();
+	}
+
+MULTI CATCH BLOCKS   --> if the code more than one type of exception we can use multicatch blocks
+
+					parent exception type can not be placed before the child exception type
+
+FINALLY BLOCK       --> An optional block that can be given after last catch block 
+
+				 --> always gets executed regardless of the exception is being handled or not handled
+
+					 System.exit(0); if we use this before the finally block the finally block will not be executed
+
+
+THROWS KEYWORD		--> used for handling checked exceptions ONLY
+
+				--> Used within the method signature
+
+			  	--> Informs the compiler that method throws one of the listed type exception
+
+				--> Fastest way to get rid of the compilation error that’s caused by a checked exception
+
+
+THROW KEYWORD		--> Used for manually throwing an exception
+
+				throw new ExceptionType(MesssagesString); After running it gives thos error message to us
+
+--------------------------------------------------------------------------------------------------------------------
+
+ABSTRACTION	 Focusing on the essentials without worrying about the small details(implementation) of the method
+
+IN INTERVIEW 
+
+There are two ways to achieve the abstraction 
+1= to make abstract the method and the class
+2= to create an interface class
+
+Abstract METHOD has not a body.
+
+Abstract CLASS:	 meant to be super(PARENT) class.
+				 It can not be final and can not be instantiated 
+				 so it cannot creat object
+
+All methods variables and blocks of non abstract class can have abstract methods
+
+All sub classes MUST use the abstract methods from  their abstract class
+
+
+	CLASS							Abstract class 						Interface
+
+blueprint of objects			meant to be parent has to common features		it is not a class
+specifies what the object MUST have
+
+can be instantiated		BOTH		Can not be instantiated 					Can not be instantiated
+
+					BOTH		is used for achieving abstraction				is used for achieving abstraction
+
+					BOTH		Can not be final 							Can not be final
+
+ 					BOTH		is meant to be inherited					is meant to be inherited
+
+
+						Multiple inheritance is not allowed				Multiple inheritance is allowed
+
+						Can have constructor 							Can not have constructor
+
+						Can have instance, static and abstract methods 		Can have static, abstract and default methods only
+
+						Can have instance and static variables				Can only have static variable (final by default)
+
+						Can use other access modifiers than public 			Can not use other access modifiers than public
+
+--------------------------------------------------------------------------------------------------------------------
+
+INTERFACE **Implements** keyword is used to inherit from interface(s)
+
+
+INTERFACE 	is to provide additional methods that any class needs
+			
+			It is a template, BLUEPRINT of class
+
+			It can not be final and be instantiated 
+
+		  	can have final and static variables ONLY
+			
+			Public is the only access modifier that can be used in interface
+
+			Abstract keyword is given by default to the abstract methods of interface
+
+
+AN INTERFACE IS NOT A CLASS SO --> an interface can not have instance varibales to create variables there must be a class
+						
+						  --> an interface can not have instance methods to create method there must be a class
+
+						  --> an interface can not have constructors to create construcotors there must be a class
+
+						  --> an interface can not have blocks
+						  
+						  --> an interface can not have private, default, protected access modifiers 
+
+
+class extends class			interface extends interface(s)
+
+class implements interface(s)
+
+extends first then implements
+
+--------------------------------------------------------------------------------------------------------------------
+	
+POLYMORPHISM 
+
+ONE REFERENCE AGAINST DIFFERENT OBJECTS
+
+In order for this polymorhipsm to be exist first of all inheritance is a MUST 
+there has to be IS A relationship in order for polymorphism to occur
+
+in polymorphism - Only the methods in reference type can be called
+
+			  - When we call a method, it will call overridden version from a child class
+			
+		      - If method is not overridden, it will call parent/super class version
+
+Polymorphism Rules
+				• Reference type can be parent class or interface
+
+				• Object type can be any extending or implementing child class
+
+				• Reference type decides what is accessible
+
+				• Object type decides which implementation of the method to be executed when the method is called
+
+
+-->instanceof<-- keyword can be used to check if the object is certain class.
+
+Reference type is parent, object type is child 
+--------------------------------------------------------------------------------------------------------------------
+	
+Reference Type Castings     Casting one reference type to another
+
+•THERE MUST BE INHERITANCE
+
+ There must be IS A (inheritance) relation between the object type and reference type we are casting it to,
+ otherwise ClassCastException will be thrown
+
+• There are two types of reference type castings: upcasting and downcasting
+
+UPCASTING : Casting the smaller reference type (sub type) to larger reference type (super type)
+• Upcasting is done implicitly and cast operator is not required to be given explicitly
+• Allows us to achieve polymorphism without any explicit action
+
+Downcasting : Casting the larger reference type (super type) to smaller reference type (sub type)
+• Downcasting is done explicitly and cast operator is required to be given explicitly
+• Allows us to access the features of the objects type that are not in reference type
+
+--------------------------------------------------------------------------------------------------------------------
+OOP : OBJECT ORIENTED PROGRAMMING
+Advanteges :
+	improves reusabilty
+	easy to maintain  
+	less memory
+	less codes
+	avoid duplication
+	Flexible
+
+1 - ENCAPSULATION --> hiding the data by giving private access modifier 
+				data can	getter to (read)
+				data can	setter to (write)
+
+we are restricting the data with private and only way the other class can access to data is trough the getter method
+									  only way the other class can set and change the variable trough the setter method
+so before access and set the data we can give any condition/ it s an advantages
+
+				If private data is final, we can not generate setter
+
+
+2 - INHERITANCE   --> building "IS A" relationship (parent & child class)
+
+					if there are common features for all classes we dont have to declare them one by one,
+	we can just declare one place and inherited to easiest way to get rich
+
+CONSTRUCTOR can not be inherited because constructor name must be the same with the class name 
+so parent class's constructor name will be different from the child class. 
+but if the parent class constructor is default its done auto calling will be done auto 
+so if we have any code fragment that we want to be executed for every single child objects we can just create the default in parent 
+
+OBJECT CLASS is the parent of all the classes by default
+
+inheritance could give in our auto framework we can avoid the duplication and reduce the long line codes into shortlines
+
+3 - ABSTRACTION   --> hiding the implementation details, focusing the essentials 
+					
+				Abstract method is without the body and its meant to be overridden
+				Abstract class  is not concrete no obje its meant to be parent
+
+we can use abstraction with 2 ways 
+
+1- to make the class abstract 
+2- to make  the class interface  --> so its not a class only provide additional methods that subclasses need
+
+
+4 - POLYMORPHISM  --> ability of the objects to take on many forms
+
+--------------------------------------------------------------------------------------------------------------------
+
+Data Structures: work with data		1- ARRAY   2- 	COLLECTION  3- MAP
+
+FIRST DIFFERENCE IS SUPPORTS THINGS 
+
+Array: size is fixed
+		SUPPORTS both primitives & non-primitives
+
+
+Collection (I): ***there are more than one class in collection so we say for all of them COLLECTIONS
+
+THE ADVANTAGE 1 : Size is dynamic SO WE CAN DECREASE AND INCREASE its a growable in nature
+
+THE ADVANTAGE 2 : HAS STANDART DATA STRUCTURE AND THERE ARE READY METHODS TO U
+
+				SUPPORTS non-primitives ONLY 
+						so if we want to use integers decimal numbers in collections we have to use wrapper classes for this
+
+Collection has 3 child class		 1- LIST		 2- SET		 3-QUEUE
+
+
+	List (I): accepts DUPLICATEs, has INDEX numbers, INSERTION order preserved
+
+
+				ArrayList (C) : internally uses array
+									accessing/retriving the element is faster ( get() )
+
+				LinkedList(C)	: internally uses doubly linked list
+									each value will have pointer to the next value  
+									adding/removing is faster ( add()/remove() ) than the other list's childs
+
+				Vector (C)	: internally uses array
+									is Synchronized ==> Thread-safe (one thread at time being executed)
+
+				Stack (C)		: Is synchronized
+							  		 Last in first out order (LIFO)
+
+								pop() ===> LIFO to decrease
+
+
+	Set (I): does NOT accept DUPLICATEs, does NOT have INDEX, INSERTION order NOT preserved
+
+
+				HashSet (C)		: its the fastest in them, order is RANDOM maintains random order
+
+
+				LinkedHashSet (C)	: keeps the INSERTION order as it is
+
+
+				TreeSet (C)		: keeps the SORTED (ascending) order, does NOT accept NULL
+
+
+
+
+	Queue(I): DUPLICATEs are allowed , INSERTION order NOT preserved,  First-in, First out order (FIFO)
+
+								poll() ===> FIFO to decrease
+
+				PriorityQueue (C)	: Maintains the RANDOM order, Does NOT accept NULL values
+
+				ArrayDeque (C)		: Maintain the INSERTION order,  Does Not Accept null values
+
+
+Collection interface is considered as root interface of collection framework
+Collection interface defines most common methods whic are applicable for any collection object
+
+size(), isEmpty(), add(), addAll(), remove(), removeAll(), removeIf(), contains(), containsAll(), retainAll(), clear(), toArray()
+
+
+Synchronized: multiple threads are being executed one thread at time 
+			
+			advantage: thread-safe
+			disadvantage: slower
+
+
+process: execution instance of a program
+
+thread: A sequence of execution within process
+
+multi-threading: two or more threads being executed within the process
+
+multi-tasking: two or more process are running
+
+concurrently vs parellely:
+
+		concurrently:  1000 * 5 ===> 5000 seconds ===> 10000 threads
+			
+			chromer browser (process)	 ===> 10000 threads
+
+		Parallely: 	200 * 5 = 1000 seconds
+
+			chrome browser1  (process)  ===> 200
+			chrome browser2  (process)  ===> 200
+			chrome browser3  (process)  ===> 200
+			chrome browser4  (process)  ===> 200
+			chrome browser5  (process)  ===> 200
+
+
+
+ArrayList vs LinkedList vs Vector vs Stack:
+		
+		All of them are Lists (allows duplicates, has index)
+
+		ArrayList: searching elements are faster
+
+		LinkedList: insertion & deletion of elements are faster
+
+		Vector: Same as ArrayList but Synchronized
+
+		Stack: Has Last-in-first-out (LIFO) logic
+--------------------------------------------------------------------------------------------------------------------
+
+ITERABLE : use for removing the objects from the collection type during the iteration
+without iterable it will eventually gives error
+
+ITERATOR:
+Allows the object to be iterated by using Iterator
+Iterator is used when we want to remove elements while you iterate over a collection
+
+Iterator provides the ready methods that can be used while traversing the collections:
+• hasNext( ) boolean > verify there is any object after itself or not
+• next( )		to get the next object 
+• remove( )	to remove that object
+
+--------------------------------------------------------------------------------------------------------------------
+MAP 
+
+it is a collection of pairs
+data structure based on the  key + value  pairs
+key has to be unique so map doesnt allow duplicate key
+does not have IS A relation with COLLECTION
+size is dynamic so can be increased or decreased 
+
+HashMap			Maintains the random order				Accepts null value as a key and value
+
+LinkedHasMap		Maintains the insertion order			Accepts null value as a key and value
+
+TreeMap			Maintains the sorted (Ascending)order 		Does not accept null as a key and value
+
+HAshTable			Maintains the random order				Does not accept null as a key but value can be null
+			Synchronized (Thread-Safe)
+
+
+Methods of Map
+
+put(key, value) : inserts the given pairs
+
+get(key) 		 : returns the value that given key
+
+replace(key, newValue)	 : replaces the value of the given key with the given new value
+
+remove(key)	: removes the given key and its value from the map
+
+containsKey (key) :returns true if the given key is contained in the map, otherwise returns false
+
+containsValue(value):returns true if the given value is contained in the map, otherwise returns false 
+
+isEmpty() : returns true if the size of the map is 0, otherwise returns false
+
+equals(map) :returns true if the given MAp is equal with the current map, otherwise returns false
+
+clear() : removes all the pairs from the map
+
+--------------------------------------------
+
+IN ORDER TO ITERATE the maps we can use below methods
+
+keySet() : retuns all the keys of the map, returnType is Set
+
+keyValue() : returns all the value of the map, returnType is Collection      
+
+entrySet() : returns all the entries both key and value of the map
+
+--------------------------------------------------------------------------------------------------------------------
+
+ENUM : a number of things
+
+Represents a group of constants (number of things)
+Used for containing fixed set of constants
+
+
+--------------------------------------------
+Functional Interface
+
+instead of more than functions
+we can create one abstract method by giving generics name 
+
+GENERICS can be any type
+GENERICS can be any name but advices T.
+
+void function
+void test
+void apply
+
+we should add  @Functionalinterface annotation before method signature
+once using this annotation it indicates(gosterir) that this is functional interface
+its not meant to be for inheritence it s meant to be as a function
+
+it does not allow to you to create more than one abstract method
+they can only have one abstract method first of all.
+
+how we use functionalinterfaces: by using Lambda Expression
+This lambda expresion is exactly the implemention of the abstract method of the functional interface 
+Syntax: (int arg1, double arg2...)      ->            {Statements}
+		parameters		       arrow token	     Lambda expression`s body
+
+if abstract class method one parameter or no parameter we dont need to use paranthesis in lambda expression syntax
+if statement is just only one statement we dont need to use curly braces
+
+if generics type is T in ange brackets like this <T> we can use any types instead of its in the except from abstract class
+
+
+Predicate     if it has one parameter    returns boolean
+BiPredicate   if has two parameter
+  
+Consumer      if it has one parameter    Consumer returns void   
+BiConsumer    if has two parameter       BiConsumer returns any value
+
+methos is Collection of statements that are grouped together to perform an operation.
+
+
+Stream is not a data structure only its a method that takes inputs from a data structure argument( array or collection)
+Stream can not be able to change the data structure

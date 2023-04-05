@@ -14,7 +14,6 @@ import java.awt.event.KeyEvent;
 public class UploadStepDefs {
 
     UploadPage uploadPage = new UploadPage();
-    String file = "selenium notlarim";
     String extension = "txt";
 
     @When("user clicks the + button")
@@ -26,7 +25,7 @@ public class UploadStepDefs {
     public void user_clicks_the_upload_file_link() throws AWTException {
         String str = System.getProperty("user.dir");
         System.out.println("str = " + str);
-        String filePath = str + "\\src\\test\\java\\net\\seamlessly\\files\\" + file + "." + extension;
+        String filePath = str + "\\src\\test\\java\\net\\seamlessly\\files\\selenium notlarim"+"." + extension;
         uploadPage.uploadFile.sendKeys(filePath);
         BrowserUtility.sleep(3);
         uploadPage.plusButton.click();
@@ -49,8 +48,8 @@ public class UploadStepDefs {
 */
     }
 
-    @Then("user should see the file")
-    public void user_should_see_file() {
+    @Then("user should see {string} file")
+    public void user_should_see_file(String file) {
         Assert.assertTrue(uploadPage.uploadedFile(file).isDisplayed());
     }
 
@@ -59,13 +58,12 @@ public class UploadStepDefs {
     @When("user clicks the new folder link")
     public void user_clicks_the_new_folder_link() {
         uploadPage.newFolder.click();
-
         uploadPage.newFolderNameInputBox.sendKeys(folderName+ Keys.ENTER);
         BrowserUtility.sleep(3);
     }
 
-    @Then("user should see the folder")
-    public void user_should_see_folder() {
+    @Then("user should see {string} folder")
+    public void user_should_see_folder(String folderName) {
         Assert.assertTrue(uploadPage.uploadedFile(folderName).isDisplayed());
     }
 

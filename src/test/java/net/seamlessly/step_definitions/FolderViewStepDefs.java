@@ -2,6 +2,7 @@ package net.seamlessly.step_definitions;
 
 import com.google.common.base.CharMatcher;
 import io.cucumber.java.PendingException;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.seamlessly.pages.FolderViewPage;
@@ -16,6 +17,7 @@ import java.util.*;
 public class FolderViewStepDefs {
 FolderViewPage folderViewPage=new FolderViewPage();
 
+
     @When("user click the Name button")
     public void user_click_the_name_button() {
         BrowserUtility.sleep(2);
@@ -26,15 +28,16 @@ FolderViewPage folderViewPage=new FolderViewPage();
     @When("Verify user can see the folder in alphabetic older based on their names")
     public void verify_user_can_see_the_folder_in_alphabetic_older_based_on_their_names() {
 
-        List<WebElement> files = Driver.getDriver().findElements(By.xpath("(//tbody[@id='fileList'])[1]//tr"));
+        List<WebElement> files = Driver.getDriver().findElements(By.xpath("//*[@data-type=\"dir\"]"));
         List<String> namesActual = new ArrayList<>();
 
 
         for (WebElement each : files) {
 
-            namesActual.add(each.getAttribute("data-file"));
+            namesActual.add(each.getAttribute("data-file").toLowerCase());
 
         }
+        System.out.println("namesActual = " + namesActual);
 
         String expectedOrderByAscending="sort-indicator icon-triangle-n";
         String expectedOrderByDescending="sort-indicator icon-triangle-s";
@@ -148,12 +151,77 @@ FolderViewPage folderViewPage=new FolderViewPage();
             Integer[] descend = sortedSizes.toArray(new Integer[0]);
             System.out.println("descend = " + Arrays.toString(descend));
 
-            List<Object> descendSizes = Arrays.asList(descend);
+            List<Integer> descendSizes = Arrays.asList(descend);
 
             Assert.assertEquals(descendSizes,sizeActual);
 
         }
     }
+
+    @And("user click the Modified button")
+    public void userClickTheModifiedButton() {
+BrowserUtility.sleep(2);
+folderViewPage.headerDate.click();
+    }
+
+    @Then("Verify user can see the folder in order based on their uploaded dates")
+    public void verifyUserCanSeeTheFolderInOrderBasedOnTheirUploadedDates() {
+
+        List<WebElement> files = Driver.getDriver().findElements(By.xpath("(//tbody[@id='fileList'])[1]//tr"));
+        //tbody//tr[@data-type='dir']
+        List<Long> modifiedDateActual = new ArrayList<>();
+       /* List<Integer> x =  new ArrayList<Integer>();
+        int[] n = (int[])x.toArray(int[x.size()]);*/
+
+        for (WebElement each : files) {
+
+            modifiedDateActual.add(Long.valueOf(each.getAttribute("data-mtime")));
+
+        }
+        System.out.println("modifiedDateActual = " + modifiedDateActual);
+
+        String expectedOrderByAscending="sort-indicator icon-triangle-n";
+        String expectedOrderByDescending="sort-indicator icon-triangle-s";
+        String actualOrder=folderViewPage.ModifiedDateSortIndicator.getAttribute("class");
+        System.out.println("actualOrder = " + actualOrder);
+
+
+
+        if (actualOrder.equals(expectedOrderByAscending)){
+/* List<Integer> x =  new ArrayList<Integer>();
+        int[] n = (int[])x.toArray(int[x.size()]);
+        Integer[] n = x.toArray(new Integer[0]);*/
+
+            Long[] modified = modifiedDateActual.toArray(new Long[0]);
+            Arrays.sort(modified);
+            System.out.println("modified = " + Arrays.toString(modified));
+
+            List<Long> sortedModifiedDate = Arrays.asList(modified);
+            System.out.println("sortedModifiedDate = " + sortedModifiedDate);
+
+            Assert.assertEquals(sortedModifiedDate,modifiedDateActual);
+
+
+        } else if (actualOrder.equals(expectedOrderByDescending)) {
+
+            Long[] modified = modifiedDateActual.toArray(new Long[0]);
+            Arrays.sort(modified);
+            System.out.println("sizes = " + Arrays.toString(modified));
+
+            List<Long> sortedModified = Arrays.asList(modified);
+            System.out.println("sortedModified = " + sortedModified);
+
+            Collections.reverse(sortedModified);
+            Long[] descend = sortedModified.toArray(new Long[0]);
+            System.out.println("descend = " + Arrays.toString(descend));
+
+            List<Long> descendSizes = Arrays.asList(descend);
+
+            Assert.assertEquals(descendSizes,modifiedDateActual);
+
+        }
+    }
+
 
 }
 

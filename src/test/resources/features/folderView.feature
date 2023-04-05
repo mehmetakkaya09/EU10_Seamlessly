@@ -31,9 +31,16 @@ Feature: folder view feature
     And verify after clicking the name if it is on ascending order or descending order
 
 #AC2 User can change folder view order by Size
+  @SEAMLES10-655
   Scenario: Verify user can change folder view order by size
-
+    When user navigates to "files" module
     When user click the Size button
     Then Verify user can see the folder in order based on their sizes
+
+    #AC3 User can change folder view order by Modified
+    Scenario: Verify user can change folder view order by modified date
+    When user navigates to "files" module
+    And user click the Modified button
+    Then Verify user can see the folder in order based on their uploaded dates
 
 

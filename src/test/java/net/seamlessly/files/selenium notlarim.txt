@@ -1,0 +1,1235 @@
+  SELENIUM is a bunch of jar files that allows us to automate browsers
+it is a free automated testing framework used to validate web applications across different browsers and platforms. 
+
+MAVEN is building automation tool and it comes with certain type of folder structure and pom.xml files
+
+Maven is not for testers but testers will take advantage of its some functionality
+
+Developers and Tester are not working on the same projects so mavens main and test folders are different
+
+BUILD is repeating steps when creating and also managing projects
+
+pom.xml is short for "project object model" and this file is the most important file in a maven project
+
+Dependincies are just jar files. we add to pom.xml file and maven automatically dowmloads the dependincy we provide
+
+We get our expected data from requirement documents
+We get our actual data from the browser 
+
+driver.navigate() 			--> navigate methods allows us to do simple navigations
+driver.navigate().forward()  --> will take page to forward page
+driver.navigate().back() 	--> will take page to previous page
+driver.navigate().refresh()	--> will refresh the current page
+driver.navigate().to() 		--> exactly same as .get() method
+
+getTitle() 		--> gets the title of the page 		no accept argument		 returns a String type  	no certain exception
+
+getCurrentUrl()	--> gets the URL of the current page   no accept argument		 returns a String type		no certain exception
+
+driver.manage().window().maximize();  --> maximizes the currently opened browser 
+maximizing is important to see the differences in different sizes the content displayed
+
+driver.manage().window().fullscreen();--> sometimes dosnt work for windows 
+
+driver.close()		--> will close currently opened browser
+
+driver.quit(); 	--> will kill no execute current session  after that any more line of codes 
+(every run selenium a session is created)
+
+
+SELENIUM Methods 
+				- gets given URL in an opened browser
+				- it accepts a String argument
+				- it has a VOID return type
+if you provide a wrong locator or your page doesnt load as fast as it should it will throw "NoSuchElementException"
+
+.findElement(By,Locator("STRING"))
+
+.sendKeys("string to be sent"); 
+	- is used to send text using Selenium WebDriver
+	- it accepts a string argument	
+	- takes the String, and passes it into the web element as a String.
+
+- What does it do?
+- Finds and returns a single web element.
+
+- What does it accept as argument?
+- It accepts locator parameter as String.
+
+- What is the return type?
+- WebElement type: comes from Selenium library.
+
+- What kind of exception does it throw?
+- It will throw NoSuchElementException if it cannot somehow find given web element.
+
+- What happens when exception is thrown in Selenium code execution? Is it going to execute the rest of the lines?
+- Once it throws the exception, the rest of the lines will not be executed UNLESS we handle it.
+
+- When do we have NoSuchElementException?
+#1- Wrong locator provided
+#2- Synchronization: when browser driver and browser are not on the same page, driver will try to find a web element that is not loaded yet. If this happens, it will throw NoSuchElementException.
+
+
+To be able to do any action on any web element, we have to follow some steps
+1 - we have to locate teh web element what we want to work on
+2 - to locate with #findElement() and locator methods
+3 - we decide what action we want to apply, find the method, and use it on the already located web element.
+        - click
+
+
+LOCATORS:
+- What is a locator?
+    - Locators help us locate web elements using Selenium WebDriver.
+    - Locators are basically 8 methods coming from Selenium library.
+
+- id
+- name
+- className
+- linkText
+- partialLinkText
+- tagName
+
+- cssSelector
+- xpath
+
+
+1- linkText:
+    - linkText locator will look through the TEXTS OF all of the links in the page, and return the matching link.
+    - It accepts a string as the text of the link we are trying to locate
+    - This locator will ONLY ONLY ONLY works on links. <a> tags only.
+    - This method looks for EXACT text match.
+    - It is similar to .equals method coming from JAVA.
+    - It will search through HTML code and return first matching result.
+
+    ex: <a href="https://something.com"> GOOGLE SEARCH </a>
+
+    syntax: driver.findElement(By.linkText("GOOGLE SEARCH"));
+
+2- partialLinkText:
+    - linkText locator will look through the TEXTS OF all of the links in the page, and return the PARTIAL matching link.
+    - It accepts a string as the text of the link we are trying to locate
+    - This locator will ONLY ONLY ONLY works on links. <a> tags only.
+    - This method looks for PARTIAL text match.
+    - It is similar to .CONTAINS method coming from JAVA.
+    - It will search through HTML code and return first matching result.
+
+
+    ex: <a href="https://something.com"> GOOGLE SEARCH </a>
+
+    syntax1: driver.findElement(By.partialLinkText("GOOGLE"));
+    syntax2: driver.findElement(By.partialLinkText("SEARCH"));
+    syntax3: driver.findElement(By.partialLinkText("GOOGLE SEARCH"));
+
+    All 3 syntaxes returns same web element.
+
+3  name: 
+    - it uses "name" attribute's value to locate web elements.
+    - it will go through HTML code and find matching "name" attribute value, and return the first matching web element
+    - name does not have to be unique. So use whenever possible.
+
+    <div name="hu58"> </div>
+
+    syntax: driver.findElement(By.name("hu58"));
+
+4     id:
+    - it uses "id" attribute's value to locate web elements.
+    - it will go through HTML code and find matching "id" attribute value, and return the web element
+    - id HAS TO BE UNIQUE. 
+    - id attribute's value will always be unique.
+
+    <div name="hu58" id="asdf57"> </div>
+
+    syntax: driver.findElement(By.id("asdf57"));
+
+
+5    className:
+    - it uses "class" attribute's value to locate web elements.
+    - it will go through HTML code and find matching "class" attribute value, and return the first matching web element.
+    - class attribute's value does not have to be unique.
+
+    <div name="hu58" id="asdf57" class="cde45"> </div>
+
+    syntax: driver.findElement(By.className("cde45"));
+
+
+6  tagName:
+    - it will find and return the first matching tag provided.
+    - this locator does not have many use cases unless either the page is very simple page, or we are trying to get a group of web elements using findElementS method
+
+    <div name="hu58" id="asdf57" class="cde45"> </div>
+
+    syntax: driver.findElement(By.tagName("div"));
+
+
+- What happens if we provide name,class attribute value and there is more than 1 result?
+- It will find and return the first matching result.
+-----------------------------------------------------------------------------
+
+- .click();
+- What does it do?
+- It clicks to the given web element.
+
+- Does it accept argument?
+- No.
+
+- Does it work just by itself --> driver.click();
+- driver.findElement(locator).click();
+-----------------------------------------------------------------------------
+- .sendKeys();
+- What does it do?
+- It will pass the provided string into given WebElement.
+
+- Does it accept argument?
+- Yes. It accepts String argument.
+- We can pass Keys. commands into sendKeys() method as well.
+-----------------------------------------------------------------------------
+- Keys.ENTER:
+- This piece of code will imitate user pressing ENTER from keyboard.
+-----------------------------------------------------------------------------
+
+.getText();
+- What does it do?
+- It will get the content from in between the opening tag and closing tag
+
+- What is the return type?
+- String
+
+- Does it accept any argument?
+- No.
+
+syntax: We cannot say driver.getText();
+- driver.findElement(locator).getText(); --> it will return the text of given web element
+
+ex: <a href="https://tesla.com" name="uh68" class="ff58" id="bb22"> TESLA CYBERTRUCK </a>
+
+syntax: driver.findElement(By.name("uh68")).getText() --> TESLA CYBERTRUCK
+-----------------------------------------------------------------------------
+- .getAttribute();
+- What does it do?
+- It will accept an attribute and return its value.
+- It accepts a String argument
+- Return type is String
+
+ex: <a href="https://tesla.com" name="uh68" class="ff58" id="bb22"> TESLA CYBERTRUCK </a>
+
+syntax: driver.findElement(By.name("uh68")).getAttribute("href")     --> https://tesla.com
+syntax: driver.findElement(By.name("uh68")).getAttribute("name")     --> uh68
+syntax: driver.findElement(By.name("uh68")).getAttribute("class")    --> ff58
+syntax: driver.findElement(By.name("uh68")).getAttribute("id")       --> bb22
+
+-----------------------------------------------------------------------------
+
+- .isDisplayed():
+
+- What does it do?
+- It returns boolean value on a given web element.
+
+- If web element is displayed, it will return "true"
+- If web element is not displayed, it will return "false"
+
+- It does not accept any argument.
+
+- syntax: driver.findElement(locator).isDisplayed(); --> true, if displayed 
+- syntax: driver.findElement(locator).isDisplayed(); --> false, if not displayed 
+
+
+- .isSelected(); --> if web element is selected, it will return true, if not false.
+
+- .isEnabled(); --> if web element is enabled, it will return true, if not false.
+-----------------------------------------------------------------------------
+
+- cssSelector locator:
+    - cssSelector is one of 8 locators from Selenium library.
+    - cssSelector allows us to create custom locators.
+    - we are able to locate web elements with any attribute value.
+    - we are not just limited to name, id, className
+    - we can use any custom attribute we see on a web element
+
+syntax short:
+			tagName.classValue			. stands for class attribute
+
+			tagName#idValue 			# stands for id attribute
+
+syntax:	
+									
+ 			tagName[attribute='value'] 	
+				 	
+    			tagName[attribute="value"] 						
+
+
+EX:	<label class="login-item-checkbox-label" for="USER_REMEMBER">Remember me on this computer</label>
+
+using class	  	label[class='login-item-checkbox-label']
+
+using for   	  	label[for='USER_REMEMBER']
+
+
+EX:	<a href="https://tesla.com" name="uh68" class="ff58" id="bb22"> TESLA CYBERTRUCK </a>
+
+ using name		a[name='uh68']
+
+ using id   		a[id='bb22']
+
+ using class		a[class='ff58']
+
+ using href		a[href='https://tesla.com']		
+
+to find with index number
+	
+css locator:nth-of-type(index number)  --> index number is starting from 1								
+
+for example --> select#state>option:nth-of-type(4)
+
+-----------------------------------------------------------------------------
+
+- XPATH LOCATORS
+	- xpath is one of 8 locators of Selenium
+	- xpath allows us to create custom locators using provided attributes and their values
+	- We can use an y attribute and any attribute value to create     
+	- we can also use the text of the provided web element to create locators
+	- Xpath can move from parent to child and child to parent
+
+XPATH has 2 different types
+
+Interview question: What is the difference between absolute xpath and relative xpath?
+
+1- ABSOLUTE XPATH: 		"/"
+    - Absolute xpath starts with single slash
+    - It starts looking in html from the root/parent element : html element
+    - It starts from html tag, and it goes down 1 by 1 until we reach to the web element we are looking for
+    - This is not good way of locating a web element.
+    - It will break with any minimal change in the html code.
+
+    /html/body/table/tbody/tr[2]/td/div/div/form/div[4]/button
+
+2- RELATIVE XPATH			"//"
+    - Relative xpath starts with double slash 
+    - "//" means you can start from anywhere in the HTML code
+    - Since we are allowed to start from anywhere in the HTML code, relative xpath is very dependable
+    - We will use relative xpath, not absolute xpath
+    - The only time our relative xpath is breaking (not working) when/if the developer is specifically changing the attribute value we used
+
+
+ex: <a href="https://tesla.com" name="uh68" class="ff58" id="bb22"> TESLA CYBERTRUCK </a>
+
+-->            				//tagName[@attribute='value']
+
+    - using name attribute      : //a[@name='uh68']
+    - using class attribute     : //a[@class='ff58']
+    - using id attribute        : //a[@id='bb22']
+
+
+COMMONLY USED XPATH SYNTAXES:
+
+1- //tagName[@attribute='value']
+
+ We are saying, get me the given tag with provided attribute and value
+
+
+2- //tagName[contains(@attribute, 'value')]
+
+    We are saying, get me the given tag that has the attribute which contains the value in the locator
+
+    Looks for the tagName that has matching or containing attribute value
+
+
+3- //tagName[.='text']  same as //tagName[text()='text']
+
+ This locator will return the web element with given text
+
+
+4- //*[@attribute='value']
+
+  We are saying, we do not care about which tagName, return us the web element with matching attribute and value result
+
+------------------------------------------------------------------------------------
+How do we go from parent to child using xpath?
+    - Using "/" single slash we can go from parent to direct child.
+    - Using "//" double slash we can go from parent to ANY child (grand child, grand-grand child)
+
+    - If there are more than 1 matching results for an xpath locator, we can use indexes to select exactly which one we want.
+
+		USE THIS SYNTAX --> (LOCATER)[NUMBER]
+------------------------------------------------------------------------------------
+How do we move from child to parent?
+- We use "/.."
+- We do not have to provide any tag name when we are moving from child to parent.
+- It will automatically move to direct parent
+------------------------------------------------------------------------------------
+
+ What is the syntax with the indexing in xpath?
+
+- How do we use indexes with xpath?
+
+    - //tagName[@attribute='value'][3]
+    - If we use indexes without paranthesis, this way will only work in direct siblings. 
+
+    - (//tagName[@attribute='value'])[3]
+    - If we use indexes with paranthesis, this way it will work and index through the whole html page.
+
+
+
+
+------------------------------------------------------------------------------------
+
+to locate with last index
+//button[@class='btn btn-primary'][last()]
+
+redundant spaces including even ones between the words
+//tagName[normalize-space(text())='Value']
+or
+//tagName[normalize-space(@id)='Value']
+
+------------------------------------------------------------------------------------
+
+- How do you handle dynamic web elements? How do you handle web elements with dynamic attribute value?
+
+ -> Dynamic attribute value: means some part of an attribute value is changing when the page is refreshed.
+
+Answer1: we use xpath methods: contains, starts-with, and ends-with
+
+1-    //tagName[contains(@attribute, 'value')]
+2-    //tagName[starts-with(@attribute, 'value')]
+3-    //tagName[ends-with(@attribute, 'value')]
+
+Answer2: we can locate a static (stable) parent or child web element, locate that, and move to desired web element.
+
+------------------------------------------------------------------------------------
+- I do not suggest using any tools unless for just seeing example purpose.
+
+ chrome developer tools : 
+
+1- right click > copy > copy selector --> cssSelector-
+2- right click > copy > copy xpath --> relative xpath
+3- right click > copy > copy full xpath --> absolute xpath
+
+------------------------------------------------------------------------------------
+
+findElement vs findElements()
+
+- findElement
+    - returns single web element
+    - return type: WebElement (coming from Selenium)
+    - it will throw NoSuchElementException if it cannot find a web element with given locator.
+
+- findElementS:
+    - returns List of WebElements
+    - return type : List<WebElement>
+    - it will NOT throw exception, it will return empty list
+
+------------------------------------------------------------------------------------
+
+- driver.manage().timeouts().impilicitlyWait(10, TimeUnit.SECONDS);
+
+- Basically this line will allow our driver to wait UP TO given time if driver cannot immedieatly locate a web element.
+
+- We write it one time, and it is applied to the whole driver session.
+- Driver does not have to wait until 10 second is ended. If it finds the web element before maybe in 2 second, 5 seconds it will continue with execution.
+
+------------------------------------------------------------------------------------
+
+- What is TestNG?
+- TestNG is a UNIT TESTING FRAMEWORK.  It is created for developers.
+
+- ANNOTATIONS :we create structures or change behaviors of methods using TestNG?
+
+- Using annotations we can change the behaviors of the methods.
+
+- Common annotations we will be using?
+    1 @Test
+    2 BeforeMethod, AfterMethod
+    3 BeforeClass, AfterClass
+    4 BeforeTest, AfterTest
+    5 BeforeSuite, AfterSuite
+
+1- @Test :
+    		- This annotation will convert a regular Java method into a runnable TestNG test.
+    		- Each test run by default in alphabetical order.
+    		- But we can change the running order using priority
+    		- Each test is independent from each other UNLESS we create dependency.
+
+    @Test (priority = 1)
+    public void test1(){
+        //code
+
+        //assertion
+
+        //code (this code will not be ran if assertion fails)
+
+        //assertion
+    }
+
+    @Test (priority = 2, dependency="test2")
+    public void test2(){
+
+    }
+
+2- BeforeMethod:
+    - This will run once before each test.
+    - The number of tests we have will determine the number this method will be running.
+    - If I have 10 @Test, this will run 10 times before each one of them.
+
+3- AfterMethod:
+    - Same as BeforeMethod, but it will run after.
+    - It will just run once after each @Test.
+
+4- BeforeClass:
+    - This will run ONLY ONE TIME in each class, before everything else.
+    - This does not care the number of @Test we have in the class.
+    - Regardless it runs one time.
+
+5- AfterClass
+    - Same as BeforeClass, but it will run after.
+    - It will just run once after everything is done in the class.
+
+Ex: If we want to open a new browser before each test, and close the browser after each test, where do we put our setup and teardown lines?
+    #1- BeforeMethod : WebDriver driver = WebDriverFactor.getDriver("chrome");
+    #2- AfterMethod    : driver.close();
+
+------------------------------------------------------------------------------------
+
+Assertions --> are used to verify if actual = expected
+    			- String, int, List<WebElement>, List<String>
+    			- Assertions determine if a test passes or fails.
+
+- Which assertions we have seen so far?
+
+   1 - Assert.assertEquals()
+        - Accepts 2 arguments.
+        - Both arguments have to be same type. 
+        - It will compare and determine fail or pass.
+
+   2 - Assert.assertTrue()
+        - Accepts a boolean value.
+        - If boolean returns true --> test passes
+        - If boolean returns false --> test fails
+
+   3 - Assert.fail()
+        - If you call this method in a @Test your test will fail regardless. 
+
+------------------------------------------------------------------------------------
+DROPDOWNS:
+
+we have 2 types of dropdowns 
+
+1- HTML Dropdowns (non-select)
+    - If the dropdowns are created using anything other than <select> tag, it is a "non-select dropdown"
+
+2- Select Dropdowns
+    - If dropdown is created using <select> tag, it is a select dropdown
+    - To be able to use the Select class from Selenium, it has to be <select> dropdown.
+
+- How do we handle select dropdowns?
+
+First we will inspect and see what type of dropdown it is.
+If it is HTML dropdown we will just locate and click
+If it is <Select> dropdown we create Select class from Selenium library.
+
+
+# I would create Select class object
+# I would locate the <select> dropdown and pass it into the constructor.
+# Now I can use the Select object with the methods that comes from Select class.
+
+How do we get all of the options from a Select dropdown?
+- getOptions : to get all <options>
+    - Return type: List<WebElement>
+
+How do we get currently selected option?
+- getFirstSelectedOption : returns the currently selected option as a single web element.
+    - Return type: WebElement
+
+- this method can be used to get the default value
+- also can be used to get the value after selecting something.
+
+
+- How do we select options from a Select dropdown?
+	 We can use 3 methods provided by Selenium library
+1 - selectByIndex
+2 - selectByValue
+3 - selectByVisibleText
+
+Syntax of how do we handle Select dropdown?
+
+- We create object of Select class
+- We need to locate the dropdown <select> tag itself and pass it into the Select constructor.
+
+    Select dropdownName = new Select(driver.findElement(By.LOCATOR));
+
+- We can use the object for handling the dropdowns.
+
+    dropdownName.selectByVisibleText();
+
+------------------------------------------------------------------------------------
+
+- What is an alert?
+-some pop-ups happening on the page
+-developers use alerts to get users attention to deliver some centent
+
+- How many types of alerts do we have?
+
+ we have 2 types of alert
+
+1 - Html alerts       --> this will present inside of the <html> page as some web element we just locate and click
+						
+2 - JavaScript alerts
+
+we have 3 types of javascript alerts 
+
+1 - information alerts  --> its just warning users only accept this
+2 - confirmation alerts --> users can accept and decline
+3 - prompt alerts       --> users can accept and decline also sendKeys to
+
+- How do we handle Alerts using Selenium?
+we will check the type of alert. if its a JS alert, we use Alert 
+
+syntax = Alert alert = driver.switchTo().alert();
+
+	alert.accept();
+   	alert.dismiss();
+   	alert.sendKeys("string");
+
+------------------------------------------------------------------------------------
+
+- What is an iframe?         --> there is an <html> in other <html>
+
+							Most of the time it is used to create independent sections in a page 
+								for advertisements, maps, video content or anything independent.
+
+- How do we handle iframes?  -->we must switch to iframe <html> from default <html> before being able to do anything inside of it 
+
+						if we dont switch before locate the element we will get NoSuchElementEXception. 
+
+- How many ways we have to switch to inner iframe? 3 ways
+
+1- by index                   --> starts from 0 and we count					   syntax: driver.switchTo().frame(index);
+2- by id-name value	   		 -->pass its id or name attribute' values as a string   syntax: driver.switchTo().frame("id-name value"); 
+3- bylocating as a webelement -->locate iframe tag	   						   syntax: driver.switchTo().frame(WebElement);
+    													or	syntax: driver.switchTo().frame(driver.findElement(By.locator));
+
+How do we go switch driver's focus to default iframe?
+    											driver.switchTo().parentFrame();
+    											driver.switchTo().defaultContent();
+
+line 1   	 <html>
+
+line 2        	<html>
+line 3           	 <html>   --> driver.switchTo().parentFrame();        --> will focus to 2
+           	 	 </html>  --> driver.switchTo().defaultContent();     --> will focus to #1
+       	 </html>  
+
+line 4        	<html>         --> driver.switchTo().parentFrame();         --> will focus to #1 
+       	 </html>            --> driver.switchTo().defaultContent();      --> will focus to #1 
+
+
+    		 </html>
+
+- The only time parentFrame() method and defaultContent() method will make any difference in use if we have iframe inside of another iframe.
+- Otherwise if we have 1 layer of iframe they will both switch back to default html
+
+------------------------------------------------------------------------------------
+- WINDOWS
+
+- Is there any difference for selenium if it is a tab or window?
+- No. Regardless if it is a window or a tab it is all a WINDOW for Selenium.
+
+- How does Selenium knows which window is different from which?
+- WindowHandles
+
+- What is a window handle?
+- A randomly generated unique alphanumeric ID for each window.
+
+- Every window has their own window handle randomly generated by selenium.
+- We don't have to do anything special for it.
+
+- How do we get the current window's handle?
+- .getWindowHandle();
+
+- What is the return type?
+- String
+- It will capture and return the current windows handle as a String.
+
+- How do we get all of the currently opened windows' handles?
+- .getWindowHandles();
+
+- What is the return type?
+- Set <String> 
+
+- Selenium will only return the window handles from the currently executed session.
+
+- Syntax: driver.switchTo().window(windowHandle);
+
+------------------------------------------------------------------------------------
+
+- How do we go from sibling to sibling?  --> There are 2 methods for going from sibling to sibling
+
+1-   "/preceding-sibling::"  --->  will go to the sibling that comes before
+2-   "/following-sibling::"  --->  will go to the sibling that comes after
+
+- The web element we locate will become the starting point (point 0).
+- We decide whether we want to go preceding or following sibling.
+- We count and we pass the index number.
+
+    //tagName[@attribute='value']
+
+ex:    //option[@value='3']
+
+    <select>
+2        <option value="1"> Orange 1</option>
+1        <option value="2"> Orange 2</option>
+0        <option value="3"> Orange 3</option>
+1        <option value="4"> Orange 4</option>
+2        <option value="5"> Orange 5</option>
+    </select>
+
+
+//option[@value='3']/preceding-sibling::option[1] --> this will point to Orange 1
+
+//option[@value='3']/following-sibling::option[2] --> this will point to Orange 5
+
+
+------------------------------------------------------------------------------------
+
+ex #1: locate month May using its value
+
+        (//option[@value='4'])[1]
+
+ex #2: locate month of March using May locator as a base and use sibling method
+
+        (//option[@value='4'])[1]/preceding-sibling::option[2]
+
+
+ex #3: locate month of October using May locator as a base and use sibling method
+
+        (//option[@value='4'])[1]/following-sibling::option[5]
+
+------------------------------------------------------------------------------------
+
+- HOW DO WE HANDLE WEBTABLES USING SELENIUM?
+- We write custom locators using xpath or cssSelector and get the data we want to get.
+
+- How do we create HTML web tables?
+- <table> tag creates html web tables.
+
+#1- We create the table tag
+#2- We create rows first
+#3- We create cells inside of the rows
+
+td: table data     -> used to create cells inside of a table
+th: table header-> used to create cells, but it will make content bolded and centered
+tr: table row     -> used to create rows inside of table
+
+------------------------------------------------------------------------------------
+or & and à //input[@type = `submit` AND @name = `login`]
+------------------------------------------------------------------------------------
+
+P1_ WRITE A LOCATOR THAT RETURNS THE TABLE 1 ITSELF
+
+    //table[@id='table1']
+
+P2_ WRITE A LOCATOR THAT RETURNS ALL OF THE ROWS INSIDE OF TABLE 1
+    
+    //table[@id='table1']//tr
+
+P3_ WRITE A LOCATOR THAT RETURNS ALL OF THE ROWS INSIDE OF BODY - TABLE 1 
+
+    //table[@id='table1']/tbody//tr
+
+P4_ WRITE A LOCATOR THAT RETURNS ONLY 3RD ROW IN THE BODY
+
+    //table[@id='table1']/tbody//tr[3]
+
+P5_ WRITE A LOCATOR THAT RETURNS ALL OF THE CELLS IN ALL OF THE ROW (IN BODY)
+
+    //table[@id='table1']/tbody//tr//td
+
+    //table[@id='table1']//tr//td -> if there is no <td> in <thead> we can use this too
+
+P6_ WRITE A LOCATOR THAT RETURNS ALL OF THE FIRST NAMES FROM TABLE
+
+    //table[@id='table1']/tbody//tr//td[2]
+
+P7_ WRITE A LOCATOR THAT RETURNS FRANKS CELL SPECIFICALLY
+
+    //table[@id='table1']/tbody//tr[2]//td[2]
+
+    We are saying:
+
+    //tr[2] : get me the second row in the <tbody>
+    //td[2] : get me the second cell in the 2nd row.
+
+P8_ WRITE A LOCATOR THAT RETURNS FRANKS CELL SPECIFICALLY
+    USE FRANKS TEXT
+
+    //table[@id='table1']//td[.='Frank']
+
+    - If you can create locators with text, it will be more dependent against the dynamism of the table
+
+P9_ WRITE A LOCATOR THAT RETURNS $100 CELL SPECIFICALLY
+    USE FRANKS TEXT
+
+    //table[@id='table1']/tbody//tr[3]//td[4]
+
+    //table[@id='table1']//td[.='$100.00']
+
+P10_ WRITE A LOCATOR THAT RETURNS JASONS DUE AMOUNT BASED ON JASONS NAME
+    
+1- We can locate Jason, go to parent row, and come back in the same row to get "Due" cell
+    //table[@id='table1']//tbody//td[.='Jason']/../td[4]
+
+2- We can use the sibling method from xpath
+    //table[@id='table1']//tbody//td[.='Tim']/following-sibling::td[2]
+
+P11_ WRITE A LOCATOR THAT RETURNS Tim's last name  BASED ON tim's NAME
+
+    //table[@id='table1']/tbody//td[.='Tim']/../td[1]
+
+    //table[@id='table1']/tbody//td[.='Tim']/preceding-sibling::td
+
+
+P12_ WRITE A LOCATOR THAT RETURNS ALL EMAILS THAT HAS $50 DUE DATE
+
+    //table[@id='table1']/tbody//td[.='$50.00']/preceding-sibling::td[1]
+
+
+CLASSNOTES: DAY 8
+
+- What is the topic? What are we doing?
+
+    - Why are we learning?
+        - What kind of issue we are solving with this?
+        - What are we making easy by using this?
+
+    - How are we using it? 
+    - How are we implementing it into our code (framework)?
+
+
+------------------------------------------------------------------------------------------------
+What is the PROPERTIES
+
+TEST DATA: data created or selected to satisfy the execution preconditions and inputs to execute one or more test cases
+basically all of data we select or create to pass to App under test to verify expected output is called test data
+ex:username. password .links.codes
+
+if our test data directly inside our source codes is called hard coding. 
+we are trying to avoid hard coding some of important test data in our project
+so this time if we want to change our test data every time we have to go and change one by one but it takes long time
+to pass certain important test data from outside of our code we need some thing its a configuration.properties
+    
+a few common type of files
+Text file 		: testData.txt 		-> regular text file
+Excel file 		: testData.xlsx 		-> a bit more complex with rows and cells
+CSV file 			: testData.csv			-> comma separated value
+Properties file 	: testData.properties	-> key=value format 
+
+RULES of properties files
+	Data stored key =value pairs
+	can be only 1 key with same name
+	when try to get values we must pass the exact same key
+
+
+instead of change every data in our test class one by one we will provide from one file 
+and all the rest of our java classes will be reading from that file
+so while we change one file all of rest code will be uptade auto
+
+- How do we read from properties type of file?
+
+1-) we create a class		 --> Properties properties =new Properties();
+2-) we create to use	  	 --> FileInputStream  file = new FileInputStream ("file.path");
+3-) we need to load 		 --> properties.load(file);			
+				Load "properties" object with the "file" we opened using FileInputStream
+4-) we can get	any value	 	 --> properties.getProperty("browser");
+							properties.getProperty("key");  ---> value
+
+	configuration.properties
+	testData.properties
+	data.properties
+
+-> the part before "." dot, is the name of the file.
+    - name: configuration
+    
+-> the part after "." dot, is the type of the file.
+    - type: .properties
+
+------------------------------------------------------------------------------------------------
+
+What is a JavaFaker?
+
+JavaFaker is an external dependency with a set of classes and methods
+
+javaFaker library help us automate generating random data
+
+Faker faker = new Faker();
+
+String name = faker.name().fullName(); // Miss Samanta Schmidt
+String firstName = faker.name().firstName(); // Emory
+String lastName = faker.name().lastName(); // Barton
+ 
+------------------------------------------------------------------------------------------------
+
+What is TestBase?
+
+TestBase is not a utility class/method
+
+TEstBase will store some commonly used steps in our tests
+
+TestBase is an abstract class where we create and store some re-usable methods//annotations, objects and also variables if needed
+
+When we want to add any logic to TestBase, we need to make sure it is applicable to all of the tests. 
+
+- If we add a line that is not applicable to all of the Tests, it might create challenges rather than solving them.
+
+------------------------------------------------------------------------------------------------
+
+DRIVER UTILITY CLASS
+
+what is it: 
+we are creating a new utility class : Driver
+
+why are we creating :
+1- we are writing too many lines just to be able to instantiated our WebDriver
+2- we are having hard time to pass the Same 'driver' instance around in our project
+
+When we are using any utilty method, currently we have to pass "WebDriver driver" as argument in each utility method
+
+solution: we create new getDriver() method in Driver utils class and every time we call it to guarantee the same exact instance
+
+how: using a " design pattern".->is a general repeatable solution to a commonly occurring problem in software design.
+
+We will use "Singleton Design pattern" -> it is guarantuees to return same object everytime we want to use the object.
+
+- How do we apply Singleton Design Pattern?
+1- We create private constructor
+2- We create getter method to deliver the object in the way we want to deliver.
+
+    - in the utility method, we will create the logic below.
+        - if object == null, create new object and return it.
+        - if object is not null, just return existing object.
+
+we read data from configuration.properties 
+to eliminate hard coding important test data 
+we can easily do cross browser testing
+we can easily do DATA DRIVEN TESTING(running the same set of tests against different set of data )
+
+--------------------------------------------------------------------------------
+
+- How do we handle downloads using Selenium?
+
+    - We do NOT. We can NOT handle(verify) downloads using only Selenium library.
+    - We can click to a link on a browser page.
+    - But once the file is downloaded, it will be out of scope for our selenium.
+    
+
+- How do we handle uploads using Selenium?
+    
+    - We can upload a file by simply passing the path of the file we want to upload.
+    - We use sendKeys, and pass the "path" as a String into the WebElement that can upload.
+
+
+- We just need to find the path of the file and pass it as a String.
+--------------------------------------------------------------------------------
+
+ACTIONS
+
+we use actions class to handle "advanced" mouse and keyboard actions.
+such as doubleclick,  draganddrop, 
+
+Actions actions = new Actions();
+--------------------------------------------------------------------------------
+
+JavascriptExecutor:
+    - This interface allows us to pass JavaScript functions(methods) into our JAVA-Selenium code.
+
+    - It has two methods in it.
+
+    - executeAsyncScript
+    - executeScript: this method accepts JavaScript methods as a String and applies them into our code.
+
+ P.I.Q:
+
+- How many ways do you know how to scroll?
+
+#1- I can use window.scroll by method with JSExecutor to scroll certain number of pixels.
+
+    syntax :JavascriptExecutor.executeScript("window.scrollBy(0,750)")
+
+#2- arguments[0].scrollIntoView --> JavaScript method
+#3- PageUp, and PageDown keys using keyboard actions.
+#4- We can use the moveToElement() method from Actions class to scroll to certain web element
+
+ --------------------------------------------------------------------------------
+
+our Framework
+
+-src
+   -test
+      -java
+		-com.companyName
+			-tests
+				-base
+				-tests(rest of our test packages)
+			-utilities
+				-Driver
+				-ConfigurationReader
+				-BrowserUtils
+			-pages
+
+-configuration reader
+-pom.xml
+
+ --------------------------------------------------------------------------------
+
+The reason we have created different packages, utility classes,type of files
+	-re-usability
+	-to organize our code
+	-less code
+	-efficient
+	-to centralize
+	-easy to maintain
+	-avoid hard coding
+
+1- configuration.properties :to centralize and avoid hard coding some of important test data 
+
+2- TestBase : we can centalize and re use setup-teardown methods, some important variables ans objects etc.
+
+3- ConfiguratioReader : to be able to repeatedly and easily read from our this file  
+
+4- Driver : to be able to instansiate our object in less line code and be able to steadily pass the same driver instance 
+
+5- Browser Utils : to centralize and reuse soe of general methods
+	-utility methods that are not specific to one page  and can be applied in different pages
+
+ --------------------------------------------------------------------------------
+
+Page Object Model Design Pattern (POM)
+
+1-What is Page Object Model Design Pattern?
+
+	-Creating .java class for each page of the web application
+	-All of the related web elements to current page will be stored to its own .java class
+	-We can also store related re usable utility methods in its "page" class as well
+
+- We have centralized pretty much everything re-usable such as:
+    - important test data: in our configuration.properties
+    - utility methods in utilities packages under different classes 
+        - Driver
+        - ConfigurationReader
+        - BrowserUtils
+
+- The only thing that we didn't centralize or create a structure around is LOCATING WEB ELEMENTS.
+
+- PAGE OBJECT MODEL DESIGN PATTERN SOLVES THIS ISSUE WE CURRENTLY HAVE.
+
+ --------------------------------------------------------------------------------
+-How are we going to implement POM Design pattern?
+
+1- Every time we create a java class for a new page of our app we will initialize our driver instance and object that class
+
+-PageFactory.initElements(driver, this);
+-This method basically initialize the driver instance and object of the class
+-Afterthis line we will be able to use THE OBJECT of the class to reach the available web elements.
+
+2- Instead of using findElement method we will use @FindBy annotation
+
+regular email format : 
+    sometext@domain.com
+    sometext@domain.gov
+    sometext@domain.edu
+
+ --------------------------------------------------------------------------------
+
+Synchronization
+
+Moving, working, operating at the same time
+
+Our code and our browser has to be synchronized otherwise it will break and outcome wont be as expected
+
+if our code is not synchronized;
+
+• code runs faster than browser can handle
+• Element appears on the HTML after certain time
+• Element is in the HTML but appears on the page after certain time
+
+ We get exceptions such as;
+• NoSuchElementException
+• ElementNotInteractableException
+
+first we can use Thread.sleep 
+but it adds hardcoded wait, it'l wait for given time period, if use much it'll make test long and heavy
+
+second we can use implicit wait
+but not used for a specific condition, applies to many lines until that driver instance is killed or changed.
+
+and If element is not found it will throw exception after the
+given time à no such element exception
+
+third we can use EXPLICIT Wait
+can be used to wait for a certain condition
+Wait until element is visible, available, clickable, not available etc…
+
+it'll wait 10 seconds using the locator provided then if condition doesn't happen  throws TimeOutException
+
+
+
+- What is synchronization? Why do we need it?
+
+- Definition: Multiple things working at the same time.
+- We need synchronization because we need to make sure our driver and our browser are on the same page at all times.
+    
+#1- Thread.sleep():
+    - This is not coming from Selenium library.
+    - This method comes from JAVA library
+    - It does not wait for ANY CONDITION TO HAPPEN.
+    - It will wait for the given duration no matter what.
+    - Therefore this is not a good practice to use.
+
+#2- implicitlyWait(10);
+    - This is coming from Selenium library.
+    
+- Does it wait for any condition to happen?
+- Yes, it is waiting for ONE condition to happen when it is triggered.
+- ImplicitlyWait is ONLY triggered when findElement (@FindBy) method can NOT find a web element with given locator.
+- It will wait until the web element is found or timer runs out.
+
+- By default, timer value is 0. We need to change it to custom number we want to change.
+- We use it once, and it will be applied to the rest of our driver session life.
+
+- What happens when the timer for implicitlyWait runs out?
+- NoSuchElementException is thrown by findElement method.
+
+
+findElement(LOCATOR); ----> TIMER STARTS
+                                10
+                                9
+                                8
+                                .
+                                .
+                                1
+                                0 ---> NOSUCHELEMENTEXCEPTION IS THROWN IF WEB ELEMENT IS NOT FOUND
+
+
+- If web element is found, the execution will continue with no problem.
+- Even if the timer has some time left in it, code execution will continue.
+
+- What is POLLING?
+- POLLING is how many times the driver checks the DOM (HTML page) to see if the web element is there (or condition happened) or not.
+- By default, polling happens every 500 ms (or twice in 1 second)
+
+- FluentWait:
+    - Very similar to ExplicitWaits (WebDriverWait).
+    - We can change the polling time.
+
+- ExplicitWait: (WebDriverWait)
+    - Comes from Selenium library.
+    - It can wait for different conditions to happen on the page.
+    - By default it does POLLING every 500ms.
+    - If given timer runs out, TimeOutException.
+
+- How to use explicit waits?
+
+#1- Create object of WebDriverWait class.
+
+    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+
+#2- Use the object we just created to create our condition.
+
+    wait.until(ExpectedConditions.visibilityOf());
+    wait.until(ExpectedConditions.invisibilityOf());
+    wait.until(ExpectedConditions.titleIs());
+    wait.until(ExpectedConditions.titleContains());
+    wait.until(ExpectedConditions...);
+
+alertIsPresent()
+elementSelectionStateToBe()
+elementToBeClickable()
+elementToBeSelected()
+frameToBeAvaliableAndSwitchToIt()
+invisibilityOfTheElementLocated()
+invisibilityOfElementWithText()
+presenceOfAllElementsLocatedBy()
+presenceOfElementLocated()
+textToBePresentInElement()
+textToBePresentInElementLocated()
+textToBePresentInElementValue()
+titleIs()
+titleContains()
+visibilityOf()
+visibilityOfAllElements()
+visibilityOfAllElementsLocatedBy()
+visibilityOfElementLocated()    
+
+
+- What is the difference in between ExplicitWait and ImplicitlyWait?
+    - ImplicitlyWait is waiting for ONLY one condition to happen, which is if web element is located or not. 
+    - NoSuchElementException will be thrown by findElement() method if web element is not found during the polling of ImplicitlyWait
+
+    - ExplicitWait can wait for many different conditions to happen.
+    - TimeOutException will be thrown if condition does not happen.
+
+
+----------------------------------------------------------------------------
+
+- POM DESIGN PATTERN:
+- WHAT IS POM DESIGN PATTERN?
+
+- Creating .java class for each page of our web application.
+- And store the relevant web elements and methods into their related classes.
+
+- How do we implement POM Design Pattern?
+
+#1- Create a constructor and initialize the object and driver instance using PageFactory.initElements() method.
+
+    public LoginPage(){
+        PageFactory.initElements(Driver.getDriver(), this);
+    }
+    
+    Driver.getDriver() --> provides the current instance of our driver.
+    this --> provides the current class' object.
+
+- We can think of this as if we are loading our driver instance INTO our class object,
+ so that our class object is able to call Selenium methods.
+
+
+#2- Use @FindBy annotation to locate web elements, instead of findElement();
+
+--> StaleElementReferenceException is solved by POM Design pattern. 
+Because every time we try to use the WebELement the reference of the Web Element will be refreshed. 
+Therefore, no more StaleElementReferenceException
+
+- WHY DO WE USE PAGE OBJECT MODEL DESIGN PATTERN?
+- We create centralized repository for our WebElements.
+- REUSABILITY
+- EASY TO MAINTAIN
+- LESS CODE
+- CLEANER CODE
+- EASY TO COLLABORATE IN BETWEEN TEAM MEMBERS
+
+How do you handle web tables?
+
+- We create custom locators with xpath or cssSelector to select any content from the webtable.
+
+
+
+----------------------------------------------------------------------------
+What is the difference between data table and scenario outline?
+
+- Data tables allow us to pass collection type into a step in a feature file
+
+- Scenario outline is completely different. It is similar approach to Parameterization. 
+
+- But instead of passing the information inside of the step, we provide a test data as a table under our Scenario outline.
+
+- We cannot create SCENARIO OUTLINE/TEMPLATE without providing an "Examples" table.
+- But, we can use "data tables" without having to use "examples"
+
+- Scenario Outline and Scenario Template are the same thing. Just alternative keyword. zzzz
+
+
+
+
+
+
+ 
+
+
+
+

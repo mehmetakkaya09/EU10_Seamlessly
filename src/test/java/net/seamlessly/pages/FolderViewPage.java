@@ -1,9 +1,13 @@
 package net.seamlessly.pages;
 
+import net.seamlessly.utility.Driver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class FolderViewPage extends BasePage{
+
+
 
     @FindBy(xpath = "//*[@id=\"headerName-container\"]/a/span[1]")
     public WebElement NamesFolder;
@@ -16,6 +20,10 @@ public class FolderViewPage extends BasePage{
 
     @FindBy(xpath = "(//*[@id=\"headerSize\"]/a/span[2])[1]")
     public WebElement sizeSortIndicator;
+
+    @FindBy(xpath = "(//*[@id=\"modified\"]/span[2])[1]")
+                      //*[@id="modified"]/span[2]
+    public WebElement ModifiedDateSortIndicator;
 
     @FindBy (css = "a[href='https://tesla.com']")
     public WebElement FileFeature;
