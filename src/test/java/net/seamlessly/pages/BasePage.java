@@ -48,4 +48,5 @@ public abstract class BasePage {
 
     @FindBy(xpath = "//li[@data-id='logout']/a")
     public WebElement logout;
+
 }

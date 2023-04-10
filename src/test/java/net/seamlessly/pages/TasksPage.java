@@ -76,8 +76,11 @@ public class TasksPage extends BasePage {
         return Driver.getDriver().findElement(By.xpath(xpath));
     }
 
-    @FindBy(xpath = "//span[.='new task']/../../../..")
-    public WebElement completedTaskClosed;
+
+    public WebElement completedTaskClosed(String taskName){
+        String xpath = "//span[.='"+taskName+"']/../../../..";
+        return Driver.getDriver().findElement(By.xpath(xpath));
+    }
 
     @FindBy(xpath = "//span[.='new task AC-5']/../../../div[3]/button")
     public WebElement ac5StarIcon;
@@ -124,10 +127,18 @@ public class TasksPage extends BasePage {
     @FindBy(xpath = "//span[.='Add subtask']")
     public WebElement addSubTask;
 
+
+
     public WebElement subTaskInput(String taskName) {
         String xpath = "//input[@placeholder='Add a subtask to \""+taskName+"\"…']";
         return Driver.getDriver().findElement(By.xpath(xpath));
     }
+
+    @FindBy(xpath = "//div[contains(text(),'is already used.')]")
+    public WebElement errorMessage;
+
+    @FindBy(xpath = "//span[.='new task']")
+    public List<WebElement> newTaskList;
 
 
 }

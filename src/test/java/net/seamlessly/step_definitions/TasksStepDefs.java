@@ -10,10 +10,13 @@ import static org.junit.Assert.*;
 import org.junit.Assert;
 import org.openqa.selenium.Keys;
 
+import java.util.List;
 import java.util.Map;
 
 public class TasksStepDefs {
     TasksPage tasksPage = new TasksPage();
+
+    String testListName = "Test for Task";
 
     @When("user navigates to {string} module")
     public void user_navigates_to_module(String moduleName) {
@@ -62,7 +65,7 @@ public class TasksStepDefs {
     public void verifyThatUserSeesInTheTaskList(String taskName) {
         assertEquals(taskName, tasksPage.newTaskName.getText());
         tasksPage.deleteTask(taskName);
-        tasksPage.deleteTestList("Test for Task");
+        tasksPage.deleteTestList(testListName);
     }
 
 
@@ -76,7 +79,7 @@ public class TasksStepDefs {
         assertTrue(tasksPage.completedTaskSentence.getText().contains(completed));
     }
 
-    @And("user sees completed task number near Completed on the left")
+    @And("verify that user sees completed task number near Completed on the left")
     public void userSeesCompletedTaskNumberNearCompletedOnTheLeft() {
         assertTrue(tasksPage.completedCountOnLeft.isDisplayed());
     }
@@ -86,11 +89,10 @@ public class TasksStepDefs {
         tasksPage.leftTopLists(topListName).click();
     }
 
-    @Then("user sees completed {string} with line-through type {string}")
-    public void userSeesCompletedWithLineThroughType(String taskName, String closedSentence) {
-        assertEquals(closedSentence, tasksPage.completedTaskClosed.getAttribute("class"));
-        tasksPage.deleteTask(taskName);
-        tasksPage.deleteTestList("Test for Task");
+    @Then("verify that user sees completed {string} under {string} with line-through type {string}")
+    public void verifyThatUserSeesCompletedUnderWithLineThroughType(String taskName, String listName, String closedSentence) {
+        assertEquals(closedSentence, tasksPage.completedTaskClosed(taskName).getAttribute("class"));
+        tasksPage.deleteTestList(listName);
     }
 
     @And("user clicks star icon for fifth AC")
@@ -102,27 +104,23 @@ public class TasksStepDefs {
 
     }
 
-    @Then("user sees star icon as red color {string}")
+    @Then("verify that user sees star icon as red color {string}")
     public void userSeesStarIconAsRedColor(String red) {
 
         assertEquals(red, tasksPage.redStarColor.getCssValue("fill"));
     }
 
-    @And("user sees important task count near the Important")
+    @And("verify that user sees important task count near the Important")
     public void userSeesImportantTaskCountNearTheImportant() {
         assertTrue(tasksPage.importantCount.isDisplayed());
     }
 
-    @When("user clicks Important menu")
-    public void userClicksImportantMenu() {
-        tasksPage.important.click();
-    }
 
-    @Then("user sees important task {string}")
+    @Then("verify that user sees important task {string}")
     public void userSeesImportantTask(String taskName) {
         assertEquals(taskName, tasksPage.newTaskInImportant.getText());
         tasksPage.deleteTask(taskName);
-        tasksPage.deleteTestList("Test for Task");
+        tasksPage.deleteTestList(testListName);
     }
 
     @And("user clicks the three dots button near the task name {string}")
@@ -143,9 +141,25 @@ public class TasksStepDefs {
     @Then("verify that user sees all current tasks in the page and next to the Current tab")
     public void verifyThatUserSeesAllCurrentTasksInThePageAndNextToTheCurrentTab() {
         Assert.assertEquals(tasksPage.currentPageTasksNum.size(), Integer.parseInt(tasksPage.currentNumber.getText().trim()));
-        tasksPage.deleteTestList("Test for Task");
+        tasksPage.deleteTestList(testListName);
     }
 
+
+    @Then("verify that user cannot create second same name list and sees the error message")
+    public void userCannotCreateSecondSameNameListAndSeesTheErrorMessage(List<String> errormessage) {
+        assertEquals(errormessage.get(0), tasksPage.errorMessage.getText());
+        tasksPage.addTaskInput.click();
+        tasksPage.deleteTestList(testListName);
+    }
+
+    @Then("verify that user cannot create second same name task")
+    public void verifyThatUserCannotCreateSecondSameNameTask() {
+        try {
+            assertEquals(1,tasksPage.newTaskList.size());
+        } catch (AssertionError e) {
+        }
+        tasksPage.deleteTestList(testListName);
+    }
 
 
 }

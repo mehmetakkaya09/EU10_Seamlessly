@@ -14,11 +14,9 @@ Feature: Contacts Module
     Given user login with valid credentials
     When user navigates to "Contacts" module
 
-
-  @SEAMLES10-595
+    @FK
   Scenario: User creates a new contact
-    Given user is on the "Contacts" page
     When user clicks on "New Contact" button
-    Then user should see a form to enter contact information
-    When user fills in the required fields
+    And user should see a form to enter contact information
+    And user fills in the required fields
     Then a new contact should be created and added to the list of contacts

@@ -3,10 +3,13 @@ package net.seamlessly.pages;
 
 import net.seamlessly.utility.Driver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class FilesPage extends BasePage{
+
+	UploadPage uploadPage=new UploadPage();
 
 	@FindBy(xpath = "//span[text()='Add to favorites']")
 	public WebElement addToFavoritesBtn;
@@ -29,21 +32,30 @@ public class FilesPage extends BasePage{
 	@FindBy(xpath = "//span[.='Delete comment']")
 	public WebElement deleteCommentButton;
 
+	@FindBy(xpath = "//a//span[.='Delete folder']")
+	public WebElement deleteButton;
 
+
+	public void createFolder(String fileName){
+		uploadPage.plusButton.click();
+
+		uploadPage.newFolderLink.click();
+
+		uploadPage.newFolderNameInputBox.sendKeys(fileName+ Keys.ENTER);
+	}
 
 	public void clickMoreBtn(String fileName){
 		 Driver.getDriver().findElement(By.xpath("(//tr[@data-file='"+fileName+"']//a)[3]")).click();
 	}
 
-
 	public WebElement isVisible(String fileName){
-		return Driver.getDriver().findElement(By.xpath("(//span[@class='innernametext' and .='"+fileName+"'])[2]"));
+		return Driver.getDriver().findElement(By.xpath("//tr[@data-file='"+fileName+"']"));
 	}
 
 
 	public WebElement renameFolder(String fileName){
 
-		return Driver.getDriver().findElement(By.xpath("//tr[@data-file='"+fileName+"']//form"));
+		return Driver.getDriver().findElement(By.xpath("//input[@class='filename']"));
 
 	}
 
@@ -56,10 +68,8 @@ public class FilesPage extends BasePage{
         @FindBy(xpath = "//*[@id=\"controls\"]/div[2]/div[2]/ul/li[3]/a/span[2]")
         public WebElement AddNewTextFile;
 
-
         @FindBy(xpath = "//*[@id=\"view11-input-file\"]")
         public WebElement NewTextFileTextBox;
-
 
         @FindBy(xpath = "//*[@id=\"controls\"]/div[2]/div[2]/ul/li[3]/a/form/input[2]")
         public WebElement CreateNewTextFile;
@@ -89,8 +99,6 @@ public class FilesPage extends BasePage{
 
         @FindBy(xpath = "//*[@id=\"fileList\"]/tr[1]")
         public WebElement FirstElementOfTheDeletedItems;
-
-
 
 
 }
