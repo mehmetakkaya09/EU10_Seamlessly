@@ -31,12 +31,13 @@ Feature:Profile Settings
       | arg0         |
       | Employee170  |
 
+    @SEAMLES10-632 #smoke
     Scenario: User can make "Phone number" info as private under Profile Settings page
     When user navigates the profile menu to phone number
     And user changes phone number info as private in the profile page
     Then user should see changed info in the profile page
 
-
+    @SEAMLES10-632
     Scenario:User can see the current local time under the Local dropdown
     When user navigates the profile menu to local time menu
     And user clicks the local dropdown menu and selects his "location"
